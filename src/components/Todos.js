@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { removeTodo } from "../features/todo/todoSlice";
 // import { todoSlice } from "../features/todo/todoSlice";
 
 function Todos() {
   const todos = useSelector((state) => state.todos);
-  console.log(todos);
+  const dispatch = useDispatch();
+
+  // console.log(todos);
 
   return (
     <div>
@@ -16,6 +20,14 @@ function Todos() {
             key={todo.id}
           >
             <div className="text-red">{todo.text}</div>
+            <div>
+              <button
+                onClick={() => dispatch(removeTodo(todo.id))}
+                className="bg-red-500 text-white px-4 py-2 rounded-md"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
